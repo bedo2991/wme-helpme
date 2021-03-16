@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WME HelpME
 // @namespace    wme-champs-it
-// @version      0.2
+// @version      0.3
 // @description  Help users to edit the Waze map
 // @author       bedo2991 @ Waze
 // @updateURL	 https://github.com/bedo2991/wme-helpme/raw/main/helpme.user.js
@@ -113,7 +113,7 @@
         }
 
         function doRequest(){
-            if(!W.selectionManager.hasSelectedFeatures()){
+            if(!W.selectionManager.hasSelectedFeatures()) {
                 safeAlert('error', "You must select something before sending a request");
                 return;
             }
@@ -140,7 +140,9 @@
             };
             let formURL = `https://docs.google.com/forms/d/e/${form}/viewform?usp=pp_url`;
             for(const key in fields){
-                formURL += `&${fields[key]}=${encodeURIComponent(val[key])}`;
+                if(val[key]){
+                    formURL += `&${fields[key]}=${encodeURIComponent(val[key])}`;
+                }
             }
 
             //Open the form in a new tab
